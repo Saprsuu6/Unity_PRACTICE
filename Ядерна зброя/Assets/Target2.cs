@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Target2 : MonoBehaviour
 {
+    [SerializeField]
+    private TMPro.TextMeshProUGUI score;
+
     // Start is called before the first frame update
     void Start()
     {

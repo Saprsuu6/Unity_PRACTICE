@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class IceBall : MonoBehaviour
 {
+    [SerializeField]
     public float forceModeMagnitude = 2;
+
+    [SerializeField]
+    private TMPro.TextMeshProUGUI score;
 
     private Rigidbody2D Rigidbody2D;
     private Vector2 forceDirection;
@@ -20,7 +25,7 @@ public class IceBall : MonoBehaviour
         float dy = Input.GetAxis("Vertical");
 
         forceDirection = new Vector2(dx, dy);
-        Rigidbody2D.AddForce(forceModeMagnitude * forceDirection);
+        Rigidbody2D.AddForce((forceModeMagnitude * forceDirection) / 2);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,6 +35,9 @@ public class IceBall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("Triger " + collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Border"))
+        {
+            score.text = (int.Parse(score.text) - 1).ToString();
+        }
     }
 }
