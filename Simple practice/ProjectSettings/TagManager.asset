@@ -7,6 +7,8 @@ TagManager:
   - Pipe
   - Bird
   - FinishPipe
+  - Tube
+  - Border
   layers:
   - Default
   - TransparentFX

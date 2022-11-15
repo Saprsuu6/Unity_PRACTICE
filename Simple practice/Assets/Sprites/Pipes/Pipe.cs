@@ -20,13 +20,4 @@ public class Pipe : MonoBehaviour
     {
         transform.Translate(direction * Time.deltaTime);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("FinishPipe"))
-        {
-            transform.Translate(new Vector3(30, transform.forward.y, transform.forward.z));
-            Debug.Log("FinishPipe Booom");
-        }
-    }
 }
