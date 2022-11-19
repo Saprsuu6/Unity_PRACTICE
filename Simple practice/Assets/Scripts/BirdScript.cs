@@ -30,9 +30,9 @@ public class BirdScript : MonoBehaviour
         forceDirection = Vector2.up * forceFactor;
         holdTime = 0;
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
 
-        spriteRenderer.sprite = spriteBirdDown;
+        //spriteRenderer.sprite = spriteBirdDown;
         //spriteRenderer.transform.localScale = new Vector3(-1, -1, 0);
     }
 
@@ -40,10 +40,10 @@ public class BirdScript : MonoBehaviour
     void Update()
     {
         #region Hybrid scale
-        //if (Input.GetKeyDown(KeyCode.Space)) holdTime = holdTimeLimit;
-        //if (Input.GetKey(KeyCode.Space)) holdTime -= Time.deltaTime;
-        //if (Input.GetKeyUp(KeyCode.Space)) holdTime = 0;
-        //if (holdTime > 0) rb2D.AddForce(forceDirection * Time.deltaTime * 1000);
+        if (Input.GetKeyDown(KeyCode.Space)) holdTime = holdTimeLimit;
+        if (Input.GetKey(KeyCode.Space)) holdTime -= Time.deltaTime;
+        if (Input.GetKeyUp(KeyCode.Space)) holdTime = 0;
+        if (holdTime > 0) rb2D.AddForce(forceDirection * Time.deltaTime * 100);
         #endregion
 
         if (enableTimer)
@@ -58,14 +58,13 @@ public class BirdScript : MonoBehaviour
         }
 
         #region Single scale
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb2D.AddForce(forceDirection * 20);
-            spriteRenderer.sprite = spriteBirdUp;
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    rb2D.AddForce(forceDirection * 20);
+        //    //spriteRenderer.sprite = spriteBirdUp;
 
-            enableTimer = true;
-        }
-
+        //    //enableTimer = true;
+        //}
         #endregion
     }
 }

@@ -4,13 +4,14 @@ public class AfterBoom : MonoBehaviour
 {
     [SerializeField]
     private GameObject bird;
+    private GameObject oldBird;
 
     private GameObject[] tubesForRemove;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        //oldBird = GameObject.FindGameObjectWithTag("Bird");
     }
 
     // Update is called once per frame
@@ -29,8 +30,9 @@ public class AfterBoom : MonoBehaviour
                 Destroy(item);
             }
 
+            Instantiate(bird, new Vector3(-5, 0, 0), Quaternion.identity);
             Destroy(GameObject.FindGameObjectWithTag("Bird"));
-            Instantiate(bird, new Vector3(-8, 0, 0), Quaternion.identity);
+            //Destroy(oldBird);
         }
     }
 }
