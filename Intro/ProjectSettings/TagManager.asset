@@ -7,6 +7,9 @@ TagManager:
   - Target
   - Pipe
   - Tube
+  - Energy
+  - Bird
+  - Border
   layers:
   - Default
   - TransparentFX

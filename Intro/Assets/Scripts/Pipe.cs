@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pipe : MonoBehaviour
 {
     [SerializeField]
-    private float Speed = 1;
+    private float Speed = 2;
 
     private Vector2 moveDirection;
 
@@ -17,6 +17,6 @@ public class Pipe : MonoBehaviour
     void Update()
     {
         // Обеспечить равномерное движение трубы влево
-        this.transform.Translate(moveDirection * Time.deltaTime);
+        this.transform.Translate(moveDirection * Time.deltaTime, Space.World);
     }
 }

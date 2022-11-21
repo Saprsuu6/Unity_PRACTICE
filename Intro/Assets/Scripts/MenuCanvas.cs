@@ -33,7 +33,7 @@ public class MenuCanvas : MonoBehaviour
 
         if (UserMenu.activeInHierarchy)
         {
-            ShowMenu(true, "Start");
+            ShowMenu(UserMenu.activeInHierarchy, "Start");
         }
     }
     
@@ -41,13 +41,7 @@ public class MenuCanvas : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (UserMenu.activeInHierarchy) {
-                ShowMenu(false);
-            }
-            else
-            {
-                ShowMenu(true, message: "Game paused @ time " + gameStat.GameTime );
-            }
+            ShowMenu(!UserMenu.activeInHierarchy);
         }
     }
 
@@ -68,7 +62,7 @@ public class MenuCanvas : MonoBehaviour
         MenuCanvas.Difficulty = value;
     }
 
-    private void ShowMenu(bool mode, string buttonText = "Resume", string message = "")
+    public void ShowMenu(bool mode, string buttonText = "Resume", string message = "")
     {
         if (mode)   // режим отображения меню
         {
