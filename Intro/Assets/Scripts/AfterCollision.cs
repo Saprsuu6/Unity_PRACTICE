@@ -48,10 +48,10 @@ public class AfterCollision : MonoBehaviour
     }
 
     public void Prepare()
-    {
-        menuCanvasScript.ShowMenu(true, "Again");
-
+    { 
         Destroy(oldBird);
         Instantiate(bird, new Vector3(-5, 0, 0), Quaternion.identity);
+
+        menuCanvasScript.ShowMenu(true, "Again");
     }
 }

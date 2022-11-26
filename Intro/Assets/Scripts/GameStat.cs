@@ -59,24 +59,7 @@ public class GameStat : MonoBehaviour
         GameTime = 0;
         GameEnergy = energy.fillAmount;   // TODO: зависимость от сложности
         afterCollisionScript = bird.GetComponent<AfterCollision>();
-        //menuCanvasScript = menuCanvas.GetComponent<MenuCanvas>();
-        /*
-        // plain file
-        // работа с файлами должна предусматривать возможность отсутствия файлов
-        if(System.IO.File.Exists(bestDataFilename))
-        {
-            // _bestScore = Convert.ToInt32(System.IO.File.ReadAllText(bestDataFilename));
-            string[] lines = System.IO.File.ReadAllLines(bestDataFilename);
-            try { _bestScore = Convert.ToInt32(lines[0]); } catch { _bestScore = 0; }
-            try { _bestTime = Convert.ToSingle(lines[1]); } catch { _bestTime = 0; }
-        }
-        else
-        {
-            _bestScore = 0;
-            _bestTime = 0;
-        }
-        */
-        // JSON file
+
         if (System.IO.File.Exists(bestDataJsonname))
         {
             BestData data = JsonUtility.FromJson<BestData>(
@@ -98,15 +81,6 @@ public class GameStat : MonoBehaviour
     }
     private void OnDestroy()   // метод ЖЦ, запускается перед разрушением объекта
     {
-        /*
-        // plain file
-        System.IO.File.WriteAllText(
-            bestDataFilename, 
-            $"{(_gameScore > _bestScore ? _gameScore : _bestScore)}\n"
-            + $"{(_gameTime > _bestTime ? _gameTime : _bestTime)}"
-        );
-        */
-        // JSON file
         BestData data = new()
         {
             Score = (_gameScore >= _bestScore ? _gameScore : _bestScore),
@@ -131,10 +105,10 @@ public class GameStat : MonoBehaviour
         {
             energy.fillAmount = _gameEnergy;
         }
-        else
-        {
-            afterCollisionScript.Prepare();
-        }
+        //else
+        //{
+        //    afterCollisionScript.Prepare();
+        //}
     }
     private void UpdateUiScore()
     {

@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class Sphere : MonoBehaviour
 {
+    [SerializeField]
+    private new GameObject camera;
+
     private Rigidbody rb;
+    private Vector3 forceDirection;
+
+    private const float FORCE_MAGNITUDE = 2;
 
     void Start()
     {
@@ -24,7 +30,15 @@ public class Sphere : MonoBehaviour
 
         float dx = Input.GetAxis("Horizontal");
         float dy = Input.GetAxis("Vertical");
-        rb.AddForce(new Vector3(dx, 0, dy) * 2);
+
+        //rb.AddForce(new Vector3(dx, 0, dy) * 2);
+        
+        forceDirection = camera.transform.forward;
+        forceDirection.y = 0;
+        forceDirection = forceDirection.normalized * dy * FORCE_MAGNITUDE;
+        forceDirection += camera.transform.right * dx * FORCE_MAGNITUDE;
+
+        rb.AddForce(forceDirection);
     }
 
     private void OnTriggerEnter(Collider other)
