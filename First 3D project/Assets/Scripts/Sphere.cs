@@ -5,6 +5,9 @@ public class Sphere : MonoBehaviour
     [SerializeField]
     private new GameObject camera;
 
+    [SerializeField]
+    private GameObject gate;
+
     private Rigidbody rb;
     private Vector3 forceDirection;
 
@@ -43,6 +46,11 @@ public class Sphere : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "CheckPointOne")
+        {
+            gate.GetComponent<Gates>().Open();
+        }
+
         Debug.Log(other.name);
         Destroy(other.gameObject);
     }
