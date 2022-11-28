@@ -29,7 +29,7 @@ public class AfterCollision : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Pipe"))
         {
@@ -48,10 +48,13 @@ public class AfterCollision : MonoBehaviour
     }
 
     public void Prepare()
-    { 
-        Destroy(oldBird);
-        Instantiate(bird, new Vector3(-5, 0, 0), Quaternion.identity);
+    {
+        tubesForRemove = GameObject.FindGameObjectsWithTag("Tube");
+        foreach (var item in tubesForRemove)
+        {
+            Destroy(item);
+        }
 
-        menuCanvasScript.ShowMenu(true, "Again");
+        Prepare();
     }
 }

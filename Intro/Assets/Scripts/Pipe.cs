@@ -5,13 +5,13 @@ using UnityEngine;
 public class Pipe : MonoBehaviour
 {
     [SerializeField]
-    private float Speed = 2;
+    private float Speed;
 
     private Vector2 moveDirection;
 
     void Start()
     {
-        moveDirection = Vector2.left * Speed;
+        moveDirection = Vector2.left * 5;
     }
 
     void Update()

@@ -73,6 +73,9 @@ public class MenuCanvas : MonoBehaviour
         }
         else
         {
+            if (gameStat.GameEnergy <= 0.5f) 
+                gameStat.GameEnergy = 1f;
+
             UserMenu.SetActive(false);           // Скрываем контейнер меню
             Time.timeScale = 1;                  // Запускаем физическое время
         }

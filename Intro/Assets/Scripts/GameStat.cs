@@ -105,10 +105,10 @@ public class GameStat : MonoBehaviour
         {
             energy.fillAmount = _gameEnergy;
         }
-        //else
-        //{
-        //    afterCollisionScript.Prepare();
-        //}
+        else
+        {
+            afterCollisionScript.Prepare();
+        }
     }
     private void UpdateUiScore()
     {

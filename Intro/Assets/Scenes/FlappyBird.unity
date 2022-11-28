@@ -1631,7 +1631,6 @@ MonoBehaviour:
   clock: {fileID: 2140837097}
   energy: {fileID: 1367877409}
   score: {fileID: 1295153746}
-  menuCanvas: {fileID: 532676107}
   bird: {fileID: 5329599887755763020}
 --- !u!114 &991333215
 MonoBehaviour:
@@ -4300,6 +4299,10 @@ PrefabInstance:
     - target: {fileID: 7817758814243830458, guid: 501fc8d569c4dc340af6aa59695b8fb1, type: 3}
       propertyPath: m_Name
       value: Pipe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817758814243830459, guid: 501fc8d569c4dc340af6aa59695b8fb1, type: 3}
+      propertyPath: Speed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7817758814243830460, guid: 501fc8d569c4dc340af6aa59695b8fb1, type: 3}
       propertyPath: m_RootOrder
