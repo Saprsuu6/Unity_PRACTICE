@@ -7,6 +7,8 @@ public class Sphere : MonoBehaviour
 
     [SerializeField]
     private GameObject gate;
+    [SerializeField]
+    private GameObject gateTwo;
 
     private Rigidbody rb;
     private Vector3 forceDirection;
@@ -51,6 +53,15 @@ public class Sphere : MonoBehaviour
             gate.GetComponent<Gates>().Open();
         }
 
-        Debug.Log(other.name);
+        if (other.name == "CheckPointTwo")
+        {
+            gateTwo.GetComponent<Gates>().Open();
+            GameStat.AddScore();
+        }
+
+        if (other.name == "CheckPointThree")
+        {
+            GameStat.AddScore();
+        }
     }
 }

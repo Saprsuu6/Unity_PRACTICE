@@ -3,11 +3,17 @@ using UnityEngine;
 public class GameStat : MonoBehaviour
 {
     private static TMPro.TextMeshProUGUI clock;
+    private static TMPro.TextMeshProUGUI scoreStat;
+
     private static UnityEngine.UI.Image checkPoint;
     private static UnityEngine.UI.Image checkPointTwo;
+    private static UnityEngine.UI.Image checkPointThree;
+
+    private static float score = 0;
     private static float gameTime;
     private static float checkPointOneFill;
     private static float checkPointTwoFill;
+    private static float checkPointThreeFill;
 
     public static float GameTime
     {
@@ -39,11 +45,24 @@ public class GameStat : MonoBehaviour
         }
     }
 
+    public static float CheckPointThreeFill
+    {
+        get => checkPointThreeFill;
+        set
+        {
+            checkPointThreeFill = value;
+            UpdateCheckPointThreeFill();
+        }
+    }
+
     void Start()
     {
         clock = GameObject.Find("Clock").GetComponent<TMPro.TextMeshProUGUI>();
+        scoreStat = GameObject.Find("Score").GetComponent<TMPro.TextMeshProUGUI>();
+
         checkPoint = GameObject.Find("CheckPointImageStat").GetComponent<UnityEngine.UI.Image>();
         checkPointTwo = GameObject.Find("CheckPointImageStatTwo").GetComponent<UnityEngine.UI.Image>();
+        checkPointThree = GameObject.Find("CheckPointImageStatThree").GetComponent<UnityEngine.UI.Image>();
     }
 
     void Update()
@@ -72,14 +91,27 @@ public class GameStat : MonoBehaviour
 
     private static void UpdateCheckPointTwoFill()
     {
-        if (checkPointTwoFill >= 0 && checkPointTwoFill <= 1)
+        if (CheckPointTwoFill >= 0 && CheckPointTwoFill <= 1)
         {
             checkPointTwo.fillAmount = checkPointTwoFill;
-            checkPointTwo.color = new Color(1 - CheckPointOneFill, checkPointOneFill, 0);
+            checkPointTwo.color = new Color(1 - CheckPointTwoFill, checkPointTwoFill, 0);
         }
         else
         {
             Debug.Log("CheckPointFill error:: " + checkPointTwoFill);
+        }
+    }
+
+    private static void UpdateCheckPointThreeFill()
+    {
+        if (CheckPointThreeFill >= 0 && CheckPointThreeFill <= 1)
+        {
+            checkPointThree.fillAmount = checkPointThreeFill;
+            checkPointThree.color = new Color(1 - CheckPointThreeFill, checkPointThreeFill, 0);
+        }
+        else
+        {
+            Debug.Log("CheckPointFill error:: " + checkPointThreeFill);
         }
     }
 
@@ -93,5 +125,17 @@ public class GameStat : MonoBehaviour
     {
         CheckPointTwoFill = 1;
         checkPointTwo.color = status ? Color.green : Color.red;
+    }
+
+    public static void PassCheckPoint3(bool status)
+    {
+        CheckPointThreeFill = 1;
+        checkPointThree.color = status ? Color.green : Color.red;
+    }
+
+    public static void AddScore()
+    {
+        score += 1;
+        scoreStat.text = score.ToString();
     }
 }

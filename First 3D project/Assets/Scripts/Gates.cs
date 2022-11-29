@@ -8,7 +8,7 @@ public class Gates : MonoBehaviour
 
     void Start()
     {
-        timeout = Random.Range(5, 20);
+        timeout = Random.Range(5, 10);
         timeleft = timeout;
     }
 
@@ -30,10 +30,10 @@ public class Gates : MonoBehaviour
 
         if (transform.position.y <= 1 && !GateDirectory)
         {
-            transform.position = new Vector3(
-            transform.position.x,
-            transform.localScale.y * (-1f / 2 + timeleft / timeout),
-            transform.position.z);
+            //transform.position = new Vector3(
+            //transform.position.x,
+            //transform.localScale.y * (-1f / 2 + timeleft / timeout),
+            //transform.position.z);
         }
         else if (!GateDirectory)
         {

@@ -29,6 +29,7 @@ public class ChechPointTwo : MonoBehaviour
             else
             {
                 GameStat.CheckPointTwoFill = image.fillAmount = timeleft / timeout;
+                image.color = new Color(1 - image.fillAmount, image.fillAmount, 0);
                 timeleft -= Time.deltaTime;
             }
         }
@@ -36,7 +37,7 @@ public class ChechPointTwo : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
         GameStat.PassCheckPoint2(true);
     }
 }
