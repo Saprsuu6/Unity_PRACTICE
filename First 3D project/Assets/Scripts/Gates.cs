@@ -4,33 +4,38 @@ public class Gates : MonoBehaviour
 {
     private const float timeout = 5;  // больше чем у чекпоинта
     private float timeleft;
-    //private bool GateDirectory = true;
-    //private Vector3 MIN;
+    private bool GateDirectory = true;
 
     void Start()
     {
-        MIN = new Vector3(
-            transform.position.x,
-            -2.30f,
-            transform.position.z);
-
         timeleft = timeout;
     }
 
     void Update()
     {
-        if (transform.position.y >= -2.30f)
+        if (transform.position.y >= -2.40f && GateDirectory)
         {
             transform.position = new Vector3(
             transform.position.x,
             transform.localScale.y * (-1f / 2 + timeleft / timeout),
             transform.position.z);
         }
+        else
+        {
+            GateDirectory = false;
+        }
 
-        //if (transform.position.y == -2.30)
-        //{
-        //    Debug.Log("Boom");
-        //}
+        if (transform.position.y <= 1 && !GateDirectory)
+        {
+            transform.position = new Vector3(
+            transform.position.x,
+            transform.localScale.y * (-1f / 2 + timeleft / timeout),
+            transform.position.z);
+        }
+        else
+        {
+            GateDirectory = true;
+        }
 
         timeleft -= Time.deltaTime;
     }
@@ -41,7 +46,7 @@ public class Gates : MonoBehaviour
 
         transform.position = new Vector3(
             transform.position.x,
-            -2.30f,
+            -2.40f,
             transform.position.z);
     }
 }
