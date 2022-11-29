@@ -52,6 +52,5 @@ public class Sphere : MonoBehaviour
         }
 
         Debug.Log(other.name);
-        Destroy(other.gameObject);
     }
 }

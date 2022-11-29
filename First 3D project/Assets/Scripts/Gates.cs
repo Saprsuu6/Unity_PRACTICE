@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Gates : MonoBehaviour
 {
-    private const float timeout = 5;  // больше чем у чекпоинта
+    private float timeout;
     private float timeleft;
     private bool GateDirectory = true;
 
     void Start()
     {
+        timeout = Random.Range(5, 20);
         timeleft = timeout;
     }
 
@@ -20,9 +21,11 @@ public class Gates : MonoBehaviour
             transform.localScale.y * (-1f / 2 + timeleft / timeout),
             transform.position.z);
         }
-        else
+        else if (GateDirectory)
         {
             GateDirectory = false;
+            timeleft = timeout;
+            Debug.Log("False");
         }
 
         if (transform.position.y <= 1 && !GateDirectory)
@@ -32,9 +35,11 @@ public class Gates : MonoBehaviour
             transform.localScale.y * (-1f / 2 + timeleft / timeout),
             transform.position.z);
         }
-        else
+        else if (!GateDirectory)
         {
             GateDirectory = true;
+            timeleft = timeout;
+            Debug.Log("True");
         }
 
         timeleft -= Time.deltaTime;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Countdown : MonoBehaviour
@@ -19,11 +17,19 @@ public class Countdown : MonoBehaviour
         if (timeleft < 0)
         {
             gameObject.SetActive(false);
+            GameStat.PassCheckPoint1(false);
         }
         else
         {
-            image.fillAmount = timeleft / timeout;
+            GameStat.CheckPointOneFill = image.fillAmount = timeleft / timeout;
+            image.color = new Color(1 - image.fillAmount, image.fillAmount, 0);
             timeleft -= Time.deltaTime;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(this.gameObject);
+        GameStat.PassCheckPoint1(true);
     }
 }
