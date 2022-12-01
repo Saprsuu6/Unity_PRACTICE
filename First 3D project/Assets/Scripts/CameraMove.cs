@@ -12,6 +12,7 @@ public class CameraMove : MonoBehaviour
     private const float MAX_X_ANGLE = 90;     // предельные углы поворота
     private const float MIN_X_ANGLE = 50;     // камеры вокруг оси Х
     private const float SENSITIVITY_X = 2;    // чувствительность к мыши
+    private const float SENSITIVITY_Y = 3;
 
     private const float MAX_ZOOM = 2;         // камеры к шарику
     private const float MIN_ZOOM = 0.2f;      // камеры к шарику
@@ -28,18 +29,18 @@ public class CameraMove : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            mouseY -= SENSITIVITY_X * Input.GetAxis("Mouse Y");
+            mouseY -= SENSITIVITY_X * Input.GetAxis("Mouse Y") * Time.timeScale;
             if (mouseY < MIN_X_ANGLE)
                 mouseY = MIN_X_ANGLE;
             if (mouseY > MAX_X_ANGLE)
                 mouseY = MAX_X_ANGLE;
 
-            mouseX += Input.GetAxis("Mouse X");
+            mouseX += SENSITIVITY_Y * Input.GetAxis("Mouse X") * Time.timeScale;
         }
 
         if (Input.mouseScrollDelta != Vector2.zero)
         {
-            zoom += -Input.mouseScrollDelta.y / SENSITIVITY_ZOOM;
+            zoom += -Input.mouseScrollDelta.y / SENSITIVITY_ZOOM * Time.timeScale;
             if (zoom < MIN_ZOOM)
                 zoom = MIN_ZOOM;
             if (zoom > MAX_ZOOM)

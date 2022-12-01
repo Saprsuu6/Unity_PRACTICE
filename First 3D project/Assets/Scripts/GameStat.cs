@@ -15,6 +15,12 @@ public class GameStat : MonoBehaviour
     private static float checkPointTwoFill;
     private static float checkPointThreeFill;
 
+    public static float CheckPointOneTime { get; set; } = 0;
+    public static float CheckPointTwoTime { get; set; } = 0;
+    public static float CheckPointThreeTime { get; set; } = 0;
+
+    public static float Score { get => score; }
+
     public static float GameTime
     {
         get => gameTime;
@@ -119,18 +125,21 @@ public class GameStat : MonoBehaviour
     {
         CheckPointOneFill = 1;
         checkPoint.color = status ? Color.green : Color.red;
+        CheckPointOneTime = status ? GameTime : -1f;
     }
 
     public static void PassCheckPoint2(bool status)
     {
         CheckPointTwoFill = 1;
         checkPointTwo.color = status ? Color.green : Color.red;
+        CheckPointTwoTime = status ? ActivatorTwo.GameTime : -1f;
     }
 
     public static void PassCheckPoint3(bool status)
     {
         CheckPointThreeFill = 1;
         checkPointThree.color = status ? Color.green : Color.red;
+        CheckPointThreeTime = status ? GameTime : -1f;
     }
 
     public static void AddScore()
