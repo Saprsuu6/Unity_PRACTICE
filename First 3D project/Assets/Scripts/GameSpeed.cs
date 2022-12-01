@@ -16,6 +16,7 @@ public class GameSpeed : MonoBehaviour
 
     public void ValueChangeCheck()
     {
-        Debug.Log(gameSpeed.value);
+        Time.timeScale *= gameSpeed.value;
+        Debug.Log(Time.timeScale);
     }
 }
