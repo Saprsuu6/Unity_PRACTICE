@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Sun : MonoBehaviour
 {
-    private float period = 3;
+    private float period = 5;
 
     // Start is called before the first frame update
     void Start()

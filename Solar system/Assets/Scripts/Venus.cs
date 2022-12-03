@@ -1,16 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Earth : MonoBehaviour
+public class Venus : MonoBehaviour
 {
     [SerializeField]
-    private GameObject earth;
+    private GameObject venus;
     [SerializeField]
     private GameObject atmosphere;
     [SerializeField]
     private GameObject sun;
 
-    private float dayPeriod = 3;
-    private float yearPeriod = 5f;
+    private float dayPeriod = 5;
+    private float yearPeriod = 7f;
     private float windPeriod = 2.5f;
 
     private Vector3 rotAxis;
@@ -22,8 +24,8 @@ public class Earth : MonoBehaviour
 
     void Update()
     {
-        earth.transform.Rotate(0, Time.deltaTime / dayPeriod, 0);
-        atmosphere.transform.Rotate(0, Time.deltaTime / windPeriod, 0);
+        venus.transform.Rotate(0, Time.deltaTime / dayPeriod, 0);
+        //atmosphere.transform.Rotate(0, Time.deltaTime / windPeriod, 0);
         transform.RotateAround(sun.transform.position, sun.transform.up, Time.deltaTime * 10 / yearPeriod);
     }
 }

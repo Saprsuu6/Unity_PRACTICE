@@ -11,16 +11,9 @@ public class Moon : MonoBehaviour
     [SerializeField]
     private GameObject sun;
 
-    private float nightPeriod = 2;
-    private float yearPeriod = 10f;
+    private float nightPeriod = 1;
+    private float yearPeriod = 5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         moon.transform.Rotate(0, Time.deltaTime / nightPeriod, 0);
