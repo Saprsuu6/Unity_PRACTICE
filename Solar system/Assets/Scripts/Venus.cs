@@ -25,7 +25,7 @@ public class Venus : MonoBehaviour
     void Update()
     {
         venus.transform.Rotate(0, Time.deltaTime / dayPeriod, 0);
-        //atmosphere.transform.Rotate(0, Time.deltaTime / windPeriod, 0);
+        atmosphere.transform.Rotate(0, Time.deltaTime / windPeriod, 0);
         transform.RotateAround(sun.transform.position, sun.transform.up, Time.deltaTime * 10 / yearPeriod);
     }
 }
