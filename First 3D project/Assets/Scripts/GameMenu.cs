@@ -8,6 +8,7 @@ public class GameMenu : MonoBehaviour
     private static UnityEngine.UI.Text result;
 
     private AudioSource bgMusic;
+    private bool bgMusicEnamblet;
 
     void Start()
     {
@@ -17,6 +18,8 @@ public class GameMenu : MonoBehaviour
         result = GameObject.Find("Result").GetComponent<UnityEngine.UI.Text>();
 
         bgMusic = GetComponent<AudioSource>();
+        bgMusicEnamblet = GameObject.Find("MusicToggle")
+            .GetComponent<UnityEngine.UI.Toggle>().isOn;
 
         Time.timeScale = MenuContent.activeInHierarchy ? 0.0f : 1.0f;
     }
@@ -33,7 +36,7 @@ public class GameMenu : MonoBehaviour
     {
         Hide();
     }
-   
+
     public void MusicToggleChanged(bool isChecked)
     {
         if (isChecked)
