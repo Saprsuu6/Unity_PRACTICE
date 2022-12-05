@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GameMenu : MonoBehaviour
 {
@@ -13,6 +14,29 @@ public class GameMenu : MonoBehaviour
     private AudioSource bgMusic;
     private bool bgMusicEnamblet;
     private float bgMusicaValue;
+
+    private const string settingsFilename = "setings.txt";
+
+    private void OnDestroy()
+    {
+        SaveSettings();
+    }
+
+    private void SaveSettings()
+    {
+        System.IO.File.WriteAllText(settingsFilename,
+            $"{bgMusicEnamblet};{bgMusicaValue};{isActiveAndEnabled}");
+    }
+
+    private void LoadSettings()
+    {
+        if (System.IO.File.Exists(settingsFilename))
+        {
+            string[] data = System.IO.File.ReadAllText(settingsFilename).Split(";");
+            bgMusicEnamblet = Convert.ToBoolean(data[0]);
+            bgMusicaValue = (float)Convert.ToDouble(data[1]);
+        }
+    }
 
     void Start()
     {
