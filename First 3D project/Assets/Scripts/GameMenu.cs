@@ -9,6 +9,7 @@ public class GameMenu : MonoBehaviour
 
     private AudioSource bgMusic;
     private bool bgMusicEnamblet;
+    private float bgMusicaValue;
 
     void Start()
     {
@@ -20,6 +21,11 @@ public class GameMenu : MonoBehaviour
         bgMusic = GetComponent<AudioSource>();
         bgMusicEnamblet = GameObject.Find("MusicToggle")
             .GetComponent<UnityEngine.UI.Toggle>().isOn;
+
+        bgMusicaValue = GameObject.Find("MusicSlider")
+            .GetComponent<UnityEngine.UI.Slider>().value;
+
+        UpdateBgMusic();
 
         Time.timeScale = MenuContent.activeInHierarchy ? 0.0f : 1.0f;
     }
@@ -39,9 +45,26 @@ public class GameMenu : MonoBehaviour
 
     public void MusicToggleChanged(bool isChecked)
     {
-        if (isChecked)
+        bgMusicEnamblet = isChecked;
+        UpdateBgMusic();
+    }
+
+    public void MusicVolumeChanged(float value)
+    {
+        bgMusicaValue = value;
+        UpdateBgMusic();
+    }
+
+    private void UpdateBgMusic()
+    {
+        bgMusic.volume = bgMusicaValue;
+
+        if (bgMusicEnamblet)
         {
-            bgMusic.Play();
+            if (!bgMusic.isPlaying)
+            {
+                bgMusic.Play();
+            }
         }
         else
         {
