@@ -11,6 +11,8 @@ public class Sphere : MonoBehaviour
     private GameObject gateTwo;
 
     private Rigidbody rb;
+    private AudioSource soundHitWall;
+    private AudioSource soundHitGate;
     private Vector3 forceDirection;
 
     private const float FORCE_MAGNITUDE = 2;
@@ -18,14 +20,14 @@ public class Sphere : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        AudioSource[] sounds = GetComponents<AudioSource>();
+        soundHitWall = sounds[0];
+        soundHitGate = sounds[1];
     }
 
     void Update()
     {
-        //Debug.Log("X:: " + rb.velocity.x);
-        //Debug.Log("Y:: " + rb.velocity.y);
-        //Debug.Log("Z:: " + rb.velocity.z);
-
         if (Input.GetKeyDown(KeyCode.Space) && rb.velocity.y == 0)
         {
             {
@@ -36,8 +38,6 @@ public class Sphere : MonoBehaviour
         float dx = Input.GetAxis("Horizontal");
         float dy = Input.GetAxis("Vertical");
 
-        //rb.AddForce(new Vector3(dx, 0, dy) * 2);
-        
         forceDirection = camera.transform.forward;
         forceDirection.y = 0;
         forceDirection = forceDirection.normalized * dy * FORCE_MAGNITUDE;
@@ -62,6 +62,24 @@ public class Sphere : MonoBehaviour
         if (other.name == "CheckPointThree")
         {
             GameStat.AddScore();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (GameMenu.isSoundsEnabled)
+        {
+            AudioSource sound = collision.gameObject.tag switch
+            {
+                "Wall" => soundHitWall,
+                "Gates" => soundHitGate,
+                _ => null
+            };
+
+            if (sound is null) return;
+
+            sound.volume = GameMenu.soundsVolume;
+            sound.Play();
         }
     }
 }

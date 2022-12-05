@@ -2,6 +2,9 @@
 
 public class GameMenu : MonoBehaviour
 {
+    public static bool isSoundsEnabled { get; private set; }
+    public static float soundsVolume { get; private set; }
+
     private static GameObject MenuContent;
     private static UnityEngine.UI.Text _menuMessage;
     private static UnityEngine.UI.Text buttonCaption;
@@ -19,11 +22,12 @@ public class GameMenu : MonoBehaviour
         result = GameObject.Find("Result").GetComponent<UnityEngine.UI.Text>();
 
         bgMusic = GetComponent<AudioSource>();
-        bgMusicEnamblet = GameObject.Find("MusicToggle")
-            .GetComponent<UnityEngine.UI.Toggle>().isOn;
 
-        bgMusicaValue = GameObject.Find("MusicSlider")
-            .GetComponent<UnityEngine.UI.Slider>().value;
+        bgMusicEnamblet = GameObject.Find("MusicToggle").GetComponent<UnityEngine.UI.Toggle>().isOn;
+        bgMusicaValue = GameObject.Find("MusicSlider").GetComponent<UnityEngine.UI.Slider>().value;
+
+        isSoundsEnabled = GameObject.Find("SoundsToggle").GetComponent<UnityEngine.UI.Toggle>().isOn;
+        soundsVolume = GameObject.Find("SoundsSlider").GetComponent<UnityEngine.UI.Slider>().value;
 
         UpdateBgMusic();
 
@@ -38,6 +42,7 @@ public class GameMenu : MonoBehaviour
         }
     }
 
+    #region event handlers
     public void MenuButtonClick()
     {
         Hide();
@@ -55,6 +60,18 @@ public class GameMenu : MonoBehaviour
         UpdateBgMusic();
     }
 
+    public void SoundsToggleChanged(bool isChecked)
+    {
+        isSoundsEnabled = isChecked;
+    }
+
+    public void SoundsVolumeChanged(float value)
+    {
+        soundsVolume = value;
+    }
+    #endregion
+
+    #region inner methods
     private void UpdateBgMusic()
     {
         bgMusic.volume = bgMusicaValue;
@@ -116,6 +133,7 @@ public class GameMenu : MonoBehaviour
         }
         else Show();
     }
+    #endregion
 }
 /* Обеспечить появление/исчезновение меню по ESC
  * Реализовать обработчик события кнопки
