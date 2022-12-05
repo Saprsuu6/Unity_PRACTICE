@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bird : MonoBehaviour
 {
     private new Rigidbody2D rigidbody2D;
-    public float force = 100;
+    private float force = 3;
     private Vector2 forceDirection;
 
     void Start()
@@ -16,7 +16,7 @@ public class Bird : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            rigidbody2D.AddForce(Vector2.up * force * Time.deltaTime * 100);
+            rigidbody2D.velocity = Vector2.up * force;
         }
     }
 }

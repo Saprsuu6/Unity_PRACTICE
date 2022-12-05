@@ -14,7 +14,7 @@ public class GameMenu : MonoBehaviour
         buttonCaption = GameObject.Find("ButtonCaption").GetComponent<UnityEngine.UI.Text>();
         result = GameObject.Find("Result").GetComponent<UnityEngine.UI.Text>();
 
-        Time.timeScale = MenuContent.activeInHierarchy ? 0.1f : 1.0f;
+        Time.timeScale = MenuContent.activeInHierarchy ? 0.0f : 1.0f;
     }
 
     void LateUpdate()
@@ -34,7 +34,7 @@ public class GameMenu : MonoBehaviour
         string menuMessage = "Game paused",
         string button = "Continue")
     {
-        Time.timeScale = 0.1f;
+        Time.timeScale = 0.0f;
         _menuMessage.text = menuMessage;
         buttonCaption.text = button;
 
