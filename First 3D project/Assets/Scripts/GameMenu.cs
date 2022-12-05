@@ -7,12 +7,16 @@ public class GameMenu : MonoBehaviour
     private static UnityEngine.UI.Text buttonCaption;
     private static UnityEngine.UI.Text result;
 
+    private AudioSource bgMusic;
+
     void Start()
     {
         MenuContent = GameObject.Find("MenuContent");
         _menuMessage = GameObject.Find("MenuMessage").GetComponent<UnityEngine.UI.Text>();
         buttonCaption = GameObject.Find("ButtonCaption").GetComponent<UnityEngine.UI.Text>();
         result = GameObject.Find("Result").GetComponent<UnityEngine.UI.Text>();
+
+        bgMusic = GetComponent<AudioSource>();
 
         Time.timeScale = MenuContent.activeInHierarchy ? 0.0f : 1.0f;
     }
@@ -28,6 +32,18 @@ public class GameMenu : MonoBehaviour
     public void MenuButtonClick()
     {
         Hide();
+    }
+   
+    public void MusicToggleChanged(bool isChecked)
+    {
+        if (isChecked)
+        {
+            bgMusic.Play();
+        }
+        else
+        {
+            bgMusic.Stop();
+        }
     }
 
     public static void Show(
