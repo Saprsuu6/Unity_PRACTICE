@@ -17,15 +17,10 @@ public class GameMenu : MonoBehaviour
 
     private const string settingsFilename = "setings.txt";
 
-    private void OnDestroy()
-    {
-        SaveSettings();
-    }
-
     private void SaveSettings()
     {
         System.IO.File.WriteAllText(settingsFilename,
-            $"{bgMusicEnamblet};{bgMusicaValue};{isActiveAndEnabled}");
+            $"{bgMusicEnamblet};{bgMusicaValue};{isSoundsEnabled};{soundsVolume}");
     }
 
     private void LoadSettings()
@@ -34,8 +29,20 @@ public class GameMenu : MonoBehaviour
         {
             string[] data = System.IO.File.ReadAllText(settingsFilename).Split(";");
             bgMusicEnamblet = Convert.ToBoolean(data[0]);
-            bgMusicaValue = (float)Convert.ToDouble(data[1]);
+            bgMusicaValue = Convert.ToSingle(data[1]);
+            isSoundsEnabled = Convert.ToBoolean(data[2]);
+            soundsVolume = Convert.ToSingle(data[3]);
+            Debug.Log("bgMusicEnamblet: " + bgMusicEnamblet +
+                "bgMusicaValue: " + bgMusicaValue +
+                "isSoundsEnabled: " + isSoundsEnabled +
+                "soundsVolume: " + soundsVolume);
         }
+    }
+
+    #region life sycle
+    private void OnDestroy()
+    {
+        SaveSettings();
     }
 
     void Start()
@@ -44,6 +51,8 @@ public class GameMenu : MonoBehaviour
         _menuMessage = GameObject.Find("MenuMessage").GetComponent<UnityEngine.UI.Text>();
         buttonCaption = GameObject.Find("ButtonCaption").GetComponent<UnityEngine.UI.Text>();
         result = GameObject.Find("Result").GetComponent<UnityEngine.UI.Text>();
+
+        LoadSettings();
 
         bgMusic = GetComponent<AudioSource>();
 
@@ -65,6 +74,7 @@ public class GameMenu : MonoBehaviour
             Toggle();
         }
     }
+    #endregion
 
     #region event handlers
     public void MenuButtonClick()
