@@ -17,28 +17,6 @@ public class GameMenu : MonoBehaviour
 
     private const string settingsFilename = "setings.txt";
 
-    private void SaveSettings()
-    {
-        System.IO.File.WriteAllText(settingsFilename,
-            $"{bgMusicEnamblet};{bgMusicaValue};{isSoundsEnabled};{soundsVolume}");
-    }
-
-    private void LoadSettings()
-    {
-        if (System.IO.File.Exists(settingsFilename))
-        {
-            string[] data = System.IO.File.ReadAllText(settingsFilename).Split(";");
-            bgMusicEnamblet = Convert.ToBoolean(data[0]);
-            bgMusicaValue = Convert.ToSingle(data[1]);
-            isSoundsEnabled = Convert.ToBoolean(data[2]);
-            soundsVolume = Convert.ToSingle(data[3]);
-            Debug.Log("bgMusicEnamblet: " + bgMusicEnamblet +
-                "bgMusicaValue: " + bgMusicaValue +
-                "isSoundsEnabled: " + isSoundsEnabled +
-                "soundsVolume: " + soundsVolume);
-        }
-    }
-
     #region life sycle
     private void OnDestroy()
     {
@@ -52,15 +30,30 @@ public class GameMenu : MonoBehaviour
         buttonCaption = GameObject.Find("ButtonCaption").GetComponent<UnityEngine.UI.Text>();
         result = GameObject.Find("Result").GetComponent<UnityEngine.UI.Text>();
 
-        LoadSettings();
-
         bgMusic = GetComponent<AudioSource>();
 
-        bgMusicEnamblet = GameObject.Find("MusicToggle").GetComponent<UnityEngine.UI.Toggle>().isOn;
-        bgMusicaValue = GameObject.Find("MusicSlider").GetComponent<UnityEngine.UI.Slider>().value;
+        var musicToggle = GameObject.Find("MusicToggle").GetComponent<UnityEngine.UI.Toggle>();
+        var musicSlider = GameObject.Find("MusicSlider").GetComponent<UnityEngine.UI.Slider>();
 
-        isSoundsEnabled = GameObject.Find("SoundsToggle").GetComponent<UnityEngine.UI.Toggle>().isOn;
-        soundsVolume = GameObject.Find("SoundsSlider").GetComponent<UnityEngine.UI.Slider>().value;
+        var soundsToggle = GameObject.Find("SoundsToggle").GetComponent<UnityEngine.UI.Toggle>();
+        var soundsSlider = GameObject.Find("SoundsSlider").GetComponent<UnityEngine.UI.Slider>();
+
+        if (LoadSettings())
+        {
+            musicToggle.isOn = bgMusicEnamblet;
+            musicSlider.value = bgMusicaValue;
+
+            soundsToggle.isOn = isSoundsEnabled;
+            soundsSlider.value = soundsVolume;
+        }
+        else
+        {
+            bgMusicEnamblet = musicToggle.isOn;
+            bgMusicaValue = musicSlider.value;
+
+            isSoundsEnabled = soundsToggle.isOn;
+            soundsVolume = soundsSlider.value;
+        }
 
         UpdateBgMusic();
 
@@ -106,6 +99,41 @@ public class GameMenu : MonoBehaviour
     #endregion
 
     #region inner methods
+    private void SaveSettings()
+    {
+        System.IO.File.WriteAllText(settingsFilename,
+            $"{bgMusicEnamblet};{bgMusicaValue};{isSoundsEnabled};{soundsVolume}");
+    }
+
+    private bool LoadSettings()
+    {
+        if (System.IO.File.Exists(settingsFilename))
+        {
+            string[] data = System.IO.File.ReadAllText(settingsFilename).Split(";");
+
+            try
+            {
+                bgMusicEnamblet = Convert.ToBoolean(data[0]);
+                bgMusicaValue = Convert.ToSingle(data[1]);
+                isSoundsEnabled = Convert.ToBoolean(data[2]);
+                soundsVolume = Convert.ToSingle(data[3]);
+
+                return true;
+                //Debug.Log("bgMusicEnamblet: " + bgMusicEnamblet +
+                //    "bgMusicaValue: " + bgMusicaValue +
+                //    "isSoundsEnabled: " + isSoundsEnabled +
+                //    "soundsVolume: " + soundsVolume);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex.Message);
+                return false;
+            }
+        }
+
+        return false;
+    }
+
     private void UpdateBgMusic()
     {
         bgMusic.volume = bgMusicaValue;
@@ -169,6 +197,3 @@ public class GameMenu : MonoBehaviour
     }
     #endregion
 }
-/* Обеспечить появление/исчезновение меню по ESC
- * Реализовать обработчик события кнопки
- */
