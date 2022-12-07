@@ -8,11 +8,6 @@ public class PipeSpawner : MonoBehaviour
     public GameObject pipe;
     public const float height = 2;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if (timer > maxTime)

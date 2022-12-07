@@ -13,6 +13,7 @@ public class Score : MonoBehaviour
     
     void Update()
     {
-        GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+        Debug.Log(score.ToString());
+        //GetComponent<UnityEngine.UI.Text>().text = score.ToString();
     }
 }
