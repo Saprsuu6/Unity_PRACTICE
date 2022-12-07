@@ -8,6 +8,12 @@ public class PipeSpawner : MonoBehaviour
     public GameObject pipe;
     public const float height = 2;
 
+    private void Start()
+    {
+        GameObject newPipe = GameObject.Find("Pipes");
+        Destroy(newPipe, 5);
+    }
+
     void Update()
     {
         if (timer > maxTime)

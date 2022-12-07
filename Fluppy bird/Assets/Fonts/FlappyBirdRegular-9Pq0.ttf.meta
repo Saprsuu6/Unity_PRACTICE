@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6e5254d2c5ed03042bb84a5b20f45629
+guid: 88f06779d2639874bae7716d75cd9656
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -10,7 +10,8 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Flappy Bird
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6e5254d2c5ed03042bb84a5b20f45629, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

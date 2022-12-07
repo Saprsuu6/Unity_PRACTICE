@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class AddScore : MonoBehaviour
 {
-    private AudioClip scoreClip;
+    private AudioSource scoreSource;
 
     private void Start()
     {
-        scoreClip = GetComponent<AudioClip>();
-        Debug.Log(scoreClip);
+        scoreSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -15,6 +14,7 @@ public class AddScore : MonoBehaviour
         if (collision.gameObject.CompareTag("Bird"))
         {
             Score.score++;
+            Audio.Play(scoreSource);
         }
     }
 }
