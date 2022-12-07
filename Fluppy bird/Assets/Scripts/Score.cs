@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    public static int score = 0; 
+    [SerializeField]
+    private UnityEngine.UI.Text scoreText;
+    public static int score = 0;
 
     void Start()
     {
         score = 0;
     }
-    
-    void Update()
+
+    private void LateUpdate()
     {
-        Debug.Log(score.ToString());
-        //GetComponent<UnityEngine.UI.Text>().text = score.ToString();
+        scoreText.text = score.ToString();
     }
 }
