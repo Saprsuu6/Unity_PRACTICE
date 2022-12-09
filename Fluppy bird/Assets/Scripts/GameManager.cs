@@ -4,32 +4,39 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    public GameObject gameOverCanvas;
+    public GameObject menuCanvas;
 
     private GameObject resumeGameButton;
     private GameObject startGameButton;
     private GameObject gameOverText;
+    private GameObject nightBackground;
+    private GameObject dayBackground;
+
+    // if gameOver TODO
 
     void Start()
     {
         resumeGameButton = GameObject.Find("ResumeGame");
         startGameButton = GameObject.Find("StartGame");
         gameOverText = GameObject.Find("GameOver");
+        nightBackground = GameObject.Find("BackgroundNight");
+        dayBackground = GameObject.Find("BackgroundDay");
 
-        gameOverCanvas.SetActive(false);
+        nightBackground.SetActive(false);
+        menuCanvas.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void GameOver()
     {
-        gameOverCanvas.SetActive(true);
+        menuCanvas.SetActive(true);
         resumeGameButton.SetActive(false);
         Time.timeScale = 0;
     }
 
     public void Pause()
     {
-        gameOverCanvas.SetActive(true);
+        menuCanvas.SetActive(true);
         startGameButton.SetActive(false);
         gameOverText.SetActive(false);
         Time.timeScale = 0;
@@ -44,7 +51,18 @@ public class GameManager : MonoBehaviour
     {
         startGameButton.SetActive(true);
         gameOverText.SetActive(true);
-        gameOverCanvas.SetActive(false);
+        menuCanvas.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void ChangeTheme()
+    {
+        Debug.Log("Im here");
+
+        //if (dayBackground.activeInHierarchy)
+        //{
+        //    dayBackground.SetActive(false);
+        //    nightBackground.SetActive(true);
+        //}
     }
 }
