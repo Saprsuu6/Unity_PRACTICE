@@ -10,6 +10,9 @@ public class Sphere : MonoBehaviour
     [SerializeField]
     private GameObject gateTwo;
 
+    [SerializeField]
+    private GameObject tourch;
+
     private Rigidbody rb;
     private AudioSource soundHitWall;
     private AudioSource soundHitGate;
@@ -44,6 +47,9 @@ public class Sphere : MonoBehaviour
         forceDirection += camera.transform.right * dx * FORCE_MAGNITUDE;
 
         rb.AddForce(forceDirection);
+
+        tourch.transform.position = transform.position;
+        tourch.transform.rotation = Quaternion.Euler(0, camera.transform.rotation.y, 0);
     }
 
     private void OnTriggerEnter(Collider other)
